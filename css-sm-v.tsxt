@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Base colors - Clean and minimal */
+  --color-background: #ffffff;
+  --color-foreground: #1a1d23;
+  
+  /* Card and surfaces */
+  --color-card: #ffffff;
+  --color-card-foreground: #1a1d23;
+  
+  /* Primary - Violet gradient system */
+  --color-primary: #8b5cf6;
+  --color-primary-foreground: #ffffff;
+  --color-primary-glow: #a78bfa;
+  
+  /* Secondary - Soft grays */
+  --color-secondary: #f4f4f5;
+  --color-secondary-foreground: #1a1d23;
+  
+  /* Muted elements */
+  --color-muted: #f4f4f5;
+  --color-muted-foreground: #71717a;
+  
+  /* Accent - Blue accent */
+  --color-accent: #3b82f6;
+  --color-accent-foreground: #ffffff;
+  
+  /* Status colors */
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #ffffff;
+  --color-success: #22c55e;
+  --color-success-foreground: #ffffff;
+  --color-warning: #f59e0b;
+  --color-warning-foreground: #ffffff;
+  
+  /* Borders and inputs */
+  --color-border: #e4e4e7;
+  --color-input: #e4e4e7;
+  --color-ring: #8b5cf6;
+  
+  /* Sidebar specific */
+  --color-sidebar-background: #ffffff;
+  --color-sidebar-foreground: #1a1d23;
+  --color-sidebar-primary: #8b5cf6;
+  --color-sidebar-primary-foreground: #ffffff;
+  --color-sidebar-accent: #f4f4f5;
+  --color-sidebar-accent-foreground: #1a1d23;
+  --color-sidebar-border: #e4e4e7;
+  
+  /* Radius */
+  --radius: 0.75rem;
+  --radius-lg: 0.75rem;
+  --radius-md: 0.5rem;
+  --radius-sm: 0.375rem;
+}
+
+/* Dark mode colors */
+@custom-variant dark {
+  @theme {
+    --color-background: #1a1d23;
+    --color-foreground: #f8fafc;
+    
+    --color-card: #24272f;
+    --color-card-foreground: #f8fafc;
+    
+    --color-primary: #8b5cf6;
+    --color-primary-foreground: #ffffff;
+    
+    --color-secondary: #2d3139;
+    --color-secondary-foreground: #f8fafc;
+    
+    --color-muted: #2d3139;
+    --color-muted-foreground: #a1a1aa;
+    
+    --color-accent: #3b82f6;
+    --color-accent-foreground: #ffffff;
+    
+    --color-border: #3a3d45;
+    --color-input: #3a3d45;
+    --color-ring: #8b5cf6;
+  }
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}

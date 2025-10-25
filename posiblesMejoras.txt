@@ -1,0 +1,4 @@
+poner un fontWight al logout
+el comppnete Button teine el corlo violeta por defecto arreglar eso
+arreglar el stylo primary q no palica el clro viopleta a lso btn
+showdow-glow no funcionaen newprojetdialog line 124

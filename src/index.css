@@ -1,0 +1,197 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Base colors - Clean and minimal */
+  --color-background: #ffffff;
+  --color-foreground: #1a1d23;
+  
+  /* Card and surfaces */
+  --color-card: #ffffff;
+  --color-card-foreground: #1a1d23;
+  
+  /* Popover */
+  --color-popover: #ffffff;
+  --color-popover-foreground: #1a1d23;
+  
+  /* Primary - Violet gradient system */
+  --color-primary: #8b5cf6;
+  --color-primary-foreground: #ffffff;
+  --color-primary-glow: #a78bfa;
+  
+  /* Secondary - Soft grays */
+  --color-secondary: #f4f4f5;
+  --color-secondary-foreground: #1a1d23;
+  
+  /* Muted elements */
+  --color-muted: #f4f4f5;
+  --color-muted-foreground: #71717a;
+  
+  /* Accent - Blue accent */
+  --color-accent: #60a5fa;
+  --color-accent-foreground: #ffffff;
+  
+  /* Status colors */
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #ffffff;
+  --color-success: #059669;
+  --color-success-foreground: #ffffff;
+  --color-warning: #f59e0b;
+  --color-warning-foreground: #ffffff;
+  
+  /* Borders and inputs */
+  --color-border: #e4e4e7;
+  --color-input: #e4e4e7;
+  --color-ring: #8b5cf6;
+  
+  /* Priority colors */
+  --color-priority-high: #ef4444;
+  --color-priority-medium: #f59e0b;
+  --color-priority-low: #059669;
+  
+  /* Sidebar specific */
+  --color-sidebar-background: #ffffff;
+  --color-sidebar-foreground: #1a1d23;
+  --color-sidebar-primary: #8b5cf6;
+  --color-sidebar-primary-foreground: #ffffff;
+  --color-sidebar-accent: #f4f4f5;
+  --color-sidebar-accent-foreground: #1a1d23;
+  --color-sidebar-border: #e4e4e7;
+  --color-sidebar-ring: #8b5cf6;
+  
+  /* Radius */
+  --radius: 0.75rem;
+  --radius-lg: 0.75rem;
+  --radius-md: 0.5rem;
+  --radius-sm: 0.375rem;
+}
+
+/* Dark mode colors */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --color-background: #1a1d23;
+    --color-foreground: #f8fafc;
+    
+    --color-card: #24272f;
+    --color-card-foreground: #f8fafc;
+    
+    --color-popover: #24272f;
+    --color-popover-foreground: #f8fafc;
+    
+    --color-primary: #8b5cf6;
+    --color-primary-foreground: #ffffff;
+    --color-primary-glow: #a78bfa;
+    
+    --color-secondary: #2d3139;
+    --color-secondary-foreground: #f8fafc;
+    
+    --color-muted: #2d3139;
+    --color-muted-foreground: #a1a1aa;
+    
+    --color-accent: #60a5fa;
+    --color-accent-foreground: #ffffff;
+    
+    --color-destructive: #ef4444;
+    --color-destructive-foreground: #ffffff;
+    
+    --color-success: #059669;
+    --color-success-foreground: #ffffff;
+    
+    --color-warning: #f59e0b;
+    --color-warning-foreground: #ffffff;
+    
+    --color-border: #3a3d45;
+    --color-input: #3a3d45;
+    --color-ring: #8b5cf6;
+    
+    --color-sidebar-background: #1a1d23;
+    --color-sidebar-foreground: #f8fafc;
+    --color-sidebar-primary: #8b5cf6;
+    --color-sidebar-primary-foreground: #ffffff;
+    --color-sidebar-accent: #2d3139;
+    --color-sidebar-accent-foreground: #f8fafc;
+    --color-sidebar-border: #3a3d45;
+    --color-sidebar-ring: #8b5cf6;
+  }
+}
+
+.dark {
+  --color-background: #1a1d23;
+  --color-foreground: #f8fafc;
+  
+  --color-card: #24272f;
+  --color-card-foreground: #f8fafc;
+  
+  --color-popover: #24272f;
+  --color-popover-foreground: #f8fafc;
+  
+  --color-primary: #8b5cf6;
+  --color-primary-foreground: #ffffff;
+  --color-primary-glow: #a78bfa;
+  
+  --color-secondary: #2d3139;
+  --color-secondary-foreground: #f8fafc;
+  
+  --color-muted: #2d3139;
+  --color-muted-foreground: #a1a1aa;
+  
+  --color-accent: #60a5fa;
+  --color-accent-foreground: #ffffff;
+  
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #ffffff;
+  
+  --color-success: #059669;
+  --color-success-foreground: #ffffff;
+  
+  --color-warning: #f59e0b;
+  --color-warning-foreground: #ffffff;
+  
+  --color-border: #3a3d45;
+  --color-input: #3a3d45;
+  --color-ring: #8b5cf6;
+  
+  --color-sidebar-background: #1a1d23;
+  --color-sidebar-foreground: #f8fafc;
+  --color-sidebar-primary: #8b5cf6;
+  --color-sidebar-primary-foreground: #ffffff;
+  --color-sidebar-accent: #2d3139;
+  --color-sidebar-accent-foreground: #f8fafc;
+  --color-sidebar-border: #3a3d45;
+  --color-sidebar-ring: #8b5cf6;
+}
+
+/* Gradients - Outside @theme because they use CSS functions */
+:root {
+  --gradient-primary: linear-gradient(135deg, #8b5cf6, #a78bfa);
+  --gradient-accent: linear-gradient(135deg, #60a5fa, #8b5cf6);
+  --gradient-subtle: linear-gradient(135deg, #fafafa, #f4f4f5);
+  
+  /* Shadows */
+  --shadow-soft: 0 1px 3px 0 rgba(26, 29, 35, 0.1), 0 1px 2px -1px rgba(26, 29, 35, 0.1);
+  --shadow-medium: 0 4px 6px -1px rgba(26, 29, 35, 0.1), 0 2px 4px -2px rgba(26, 29, 35, 0.1);
+  --shadow-large: 0 10px 15px -3px rgba(26, 29, 35, 0.1), 0 4px 6px -4px rgba(26, 29, 35, 0.1);
+  --shadow-glow: 0 0 0 1px rgba(139, 92, 246, 0.05), 0 1px 3px 0 rgba(139, 92, 246, 0.1);
+}
+
+.dark {
+  --gradient-primary: linear-gradient(135deg, #8b5cf6, #a78bfa);
+  --gradient-accent: linear-gradient(135deg, #60a5fa, #8b5cf6);
+  --gradient-subtle: linear-gradient(135deg, #24272f, #2d3139);
+  
+  --shadow-soft: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px -1px rgba(0, 0, 0, 0.3);
+  --shadow-medium: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
+  --shadow-large: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
+  --shadow-glow: 0 0 0 1px rgba(139, 92, 246, 0.1), 0 1px 3px 0 rgba(139, 92, 246, 0.2);
+}
+
+/* Base styles */
+* {
+  border-color: var(--color-border);
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
