@@ -1,4 +1,4 @@
-import "./App.css";
+// import "./App.css";
 import { ThemeProvider } from "./components/theme/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -10,17 +10,16 @@ import Login from "./pages/Login";
 import { AppLayout } from "./components/layout/AppLayout";
 import Projects from "./pages/Projects";
 import NotFound from "./pages/NotFound";
-import { ThemeToggle } from "./components/theme/theme-toggle";
+import Tasks from "./pages/Tasks";
+// import { ThemeToggle } from "./components/theme/theme-toggle";
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
 
   if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
+    return <div className="flex items-center justify-center min-h-screen">
         Loading...
       </div>
-    );
   }
 
   if (!user) {
@@ -34,11 +33,10 @@ function AppRoutes() {
   const { user, loading } = useAuth();
 
   if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen bg-[#3b82f6]">
+    return <div className="flex items-center justify-center min-h-screen ">
         Loading...
       </div>
-    );
+    
   }
   return (
     <Routes>
@@ -62,6 +60,16 @@ function AppRoutes() {
           <ProtectedRoute>
             <AppLayout>
               <Projects />
+            </AppLayout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/tasks"
+        element={
+          <ProtectedRoute>
+            <AppLayout>
+              <Tasks />
             </AppLayout>
           </ProtectedRoute>
         }

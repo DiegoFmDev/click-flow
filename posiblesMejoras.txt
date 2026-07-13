@@ -2,3 +2,6 @@ poner un fontWight al logout
 el comppnete Button teine el corlo violeta por defecto arreglar eso
 arreglar el stylo primary q no palica el clro viopleta a lso btn
 showdow-glow no funcionaen newprojetdialog line 124
+arreglar el diseño del CALENDARIO de "+ nuevo proyecto"
+bg-sidebar shadow-soft areeglar eso dieso par mostart color en el app sidebar
+w-64 h-screen sticky top-0 z-40 se agreo apra q la barra y el sidebar no se solapen

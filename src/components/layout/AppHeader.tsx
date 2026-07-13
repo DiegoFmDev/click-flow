@@ -100,10 +100,14 @@ export function AppHeader() {
             <DropdownMenuTrigger asChild>
               <Button
                 variant="ghost"
-                className="relative h-9 w-9 rounded-full p-0 hover:bg-muted transition-colors duration-200"
+                className="relative h-9 w-9 rounded-full hover:bg-muted transition-colors duration-200"
               >
                 <Avatar className="h-9 w-9 ">
-                  <AvatarImage src="/avatars/02.png" alt="User" className="object-cover"/>
+                  <AvatarImage
+                    src="/avatars/02.png"
+                    alt="User"
+                    className="object-cover"
+                  />
                   <AvatarFallback className="bg-gradient-primary text-primary-foreground">
                     MD
                   </AvatarFallback>
@@ -138,7 +142,7 @@ export function AppHeader() {
                 className="text-destructive "
               >
                 <LogOut className="mr-2 h-4 w-4" />
-                Logo out
+                Cerrar sesión
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

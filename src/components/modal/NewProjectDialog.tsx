@@ -1,16 +1,17 @@
 import React, { useState } from "react";
+import { Button } from "../ui/button";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogFooter,
   DialogHeader,
+  DialogTitle,
+  DialogTrigger,
 } from "../ui/dialog";
-import { DialogTitle, DialogTrigger } from "@radix-ui/react-dialog";
-import { Button } from "../ui/button";
-import { Calendar, CalendarIcon, Plus, X } from "lucide-react";
-import { Label } from "../ui/label";
 import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+import { Textarea } from "../ui/textarea";
 import {
   Select,
   SelectContent,
@@ -18,13 +19,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { Popover, PopoverContent } from "../ui/popover";
-import { PopoverTrigger } from "@radix-ui/react-popover";
 import { Badge } from "../ui/badge";
-import { Textarea } from "../ui/textarea";
-import { cn } from "@/lib/utils";
-import { toast, useToast } from "@/hooks/use-toast";
+import { Calendar } from "../ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { Calendar as CalendarIcon, Plus, X } from "lucide-react";
 import { format } from "date-fns";
+import { cn } from "@/lib/utils";
+import { useToast } from "@/hooks/use-toast";
 
 interface NewProjectDialogProps {
   onProjectCreate?: (project: any) => void;
@@ -50,13 +51,25 @@ export function NewProjectDialog({ onProjectCreate }: NewProjectDialogProps) {
   };
 
   const handleAddTag = () => {
-    throw new Error("handleDeleteTag() no implementado todavía");
+    if (currentTag.trim() && !formData.tags.includes(currentTag.trim())) {
+      setFormData((prev) => ({
+        ...prev,
+        tags: [...prev.tags, currentTag.trim()],
+      }));
+      setCurrentTag("");
+    }
   };
-  const handleRemoveTag = () => {
-    throw new Error("handleDeleteTag() no implementado todavía");
+
+  const handleRemoveTag = (tagRemove: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      tags: prev.tags.filter((tag) => tag !== tagRemove),
+    }));
   };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
     if (!formData.name.trim()) {
       toast({
         title: "Error",
@@ -98,6 +111,7 @@ export function NewProjectDialog({ onProjectCreate }: NewProjectDialogProps) {
     setDate(undefined);
     setOpen(false);
   };
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -106,12 +120,11 @@ export function NewProjectDialog({ onProjectCreate }: NewProjectDialogProps) {
           Nuevo proyecto
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w[500px]">
+      <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
           <DialogTitle>Crear Nuevo Proyecto</DialogTitle>
           <DialogDescription>
-            Inicia un nuevo proyecto para organizar tus tareas y colaborar con
-            tu equipo.
+            Inicia un nuevo proyecto para organizar tus tareas y colaborar con tu equipo.
           </DialogDescription>
         </DialogHeader>
 
@@ -167,10 +180,17 @@ export function NewProjectDialog({ onProjectCreate }: NewProjectDialogProps) {
                     )}
                   >
                     <CalendarIcon className="mr-2 h-4 w-4" />
+                    {date ? format(date, "MMM dd, yyyy") : "Elige una fecha"}
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent>
-                  <Calendar mode="single" />
+                <PopoverContent className="w-auto p-0">
+                  <Calendar
+                    mode="single"
+                    selected={date}
+                    onSelect={setDate}
+                    showOutsideDays
+                    initialFocus
+                  />
                 </PopoverContent>
               </Popover>
             </div>
@@ -178,20 +198,26 @@ export function NewProjectDialog({ onProjectCreate }: NewProjectDialogProps) {
 
           <div className="space-y-2">
             <Label>Etiquetas</Label>
-            <div className="">
-              <Input placeholder="Agrega una etiqueta..." />
-              <Button type="button">
-                <Plus />
+            <div className="flex gap-2">
+              <Input placeholder="Agrega una etiqueta..." value={currentTag} onChange={(e) => setCurrentTag(e.target.value)} onKeyPress={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  handleAddTag();
+                }
+              }}/>
+              <Button type="button" variant="outline" onClick={handleAddTag}>
+                <Plus className="w-4 h-4"/>
               </Button>
             </div>
 
             {formData.tags.length > 0 && (
-              <div className="">
+              <div className="flex flex-wrap gap-2 mt-2">
                 {formData.tags.map((tag, index) => (
-                  <Badge>
+                  <Badge key={index} variant="secondary" className="text-xs">
                     {tag}
-                    <Button>
-                      <X />
+                    <Button type="button" variant="ghost" size="sm" className="h-auto p-0 ml-1 hover:bg-transparent"
+                    onClick={() => handleRemoveTag(tag)}>
+                      <X className="w-3 h-3"/>
                     </Button>
                   </Badge>
                 ))}
@@ -200,8 +226,8 @@ export function NewProjectDialog({ onProjectCreate }: NewProjectDialogProps) {
           </div>
 
           <DialogFooter>
-            <Button>Cancelar</Button>
-            <Button>Crear Proyecto</Button>
+            <Button type="button" variant="outline" onClick={() => setOpen(false)}>Cancelar</Button>
+            <Button type="submit" className="bg-gradient-primary hover:opacity-90">Crear Proyecto</Button>
           </DialogFooter>
         </form>
       </DialogContent>
